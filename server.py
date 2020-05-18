@@ -74,6 +74,8 @@ def find_afterparties():
 def get_event_details(id):
     """View the details of an event."""
 
+    #url = 'https://app.ticketmaster.com/discovery/v2/events/Z7r9jZ1Aex7vZ'
+
     # TODO: Finish implementing this view function
     url = f'https://app.ticketmaster.com/discovery/v2/events/{id}'
     payload = {'apikey': API_KEY}
@@ -82,7 +84,7 @@ def get_event_details(id):
     event_name = data['name']
     date = data['dates']['start']['localDate']
     image_url = data['images'][0]['url']
-    print(image_url)
+    event_url = data['url']
     venues = data['_embedded']['venues']
     venue_names = [venue['name'] for venue in venues]
     classification = data['classifications'][0]
@@ -94,6 +96,7 @@ def get_event_details(id):
                             name=event_name, 
                             date=date,
                             image_url=image_url,
+                            event_url=event_url,
                             venues=venue_names, 
                             classifications=classification_detail)
 
